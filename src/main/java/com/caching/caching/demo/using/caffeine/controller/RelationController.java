@@ -6,10 +6,7 @@ import com.caching.caching.demo.using.caffeine.service.RelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +31,12 @@ public class RelationController {
         relationService.saveRelationCodes(relationsList);
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
 
+    }
+
+
+    @GetMapping("/fetchCodes")
+    public ResponseEntity<List<Relations>> fetchCodes(){
+        final List<Relations> relationsList = relationService.fetchCodes();
+        return new ResponseEntity<>(relationsList,HttpStatus.OK);
     }
 }
